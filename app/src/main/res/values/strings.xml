@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">finalproject</string>
+    <string name="textView_register">Register</string>
+    <string name="editText_fullname">Full Name</string>
+    <string name="editText_email">name@server.com</string>
+    <string name="editText_password">Password</string>
+    <string name="button_register">Register</string>
+    <string name="textView_login">Login</string>
+    <string name="textView_login_here">Login Here</string>
+    <string name="button_login">Login</string>
+    <string name="textView_create_account">Create Account</string>
+    <string name="textView_forgot_password">Forgot Password</string>
+    <string name="button_sign_out">Sign Out</string>
 </resources>

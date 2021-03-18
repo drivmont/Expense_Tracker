@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "587386064032",
+    "firebase_url": "https://androidauth-347ad-default-rtdb.firebaseio.com",
+    "project_id": "androidauth-347ad",
+    "storage_bucket": "androidauth-347ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587386064032:android:65a70a37239b21cd310dc5",
+        "android_client_info": {
+          "package_name": "com.example.finalproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "587386064032-aghor0ogr4srrhg8hv0ols5iipp1l8a9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQyd5zFkLnA9_Lt0UitQOleqBuQPaEWUE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "587386064032-aghor0ogr4srrhg8hv0ols5iipp1l8a9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
