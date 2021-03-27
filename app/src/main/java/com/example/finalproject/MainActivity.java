@@ -20,9 +20,12 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+        /*
         // remove comment to initiate registration and login activities
         // don't forget to sign out
-        /*
+
         fAuth = FirebaseAuth.getInstance();
 
         if(fAuth.getCurrentUser() == null) {
