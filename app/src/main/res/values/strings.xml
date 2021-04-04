@@ -11,4 +11,12 @@
     <string name="textView_create_account">Create Account</string>
     <string name="textView_forgot_password">Forgot Password</string>
     <string name="button_sign_out">Sign Out</string>
+    <string-array name="categories">
+        <item>Food</item>
+        <item>Home</item>
+        <item>Car</item>
+        <item>Others</item>
+    </string-array>
+
+
 </resources>

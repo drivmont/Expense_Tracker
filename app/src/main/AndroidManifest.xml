@@ -13,7 +13,6 @@
         android:theme="@style/Theme.Finalproject">
         <activity android:name=".Login"></activity>
         <activity android:name=".Register" />
-        <activity android:name=".Summary" />
         <activity android:name=".Alert" />
         <activity android:name=".Expenses" />
         <activity android:name=".MainActivity">
