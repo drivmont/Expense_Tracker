@@ -19,7 +19,9 @@ public class Alert extends AppCompatActivity implements AdapterView.OnItemSelect
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alert);
+        //Create db handler to add new entries to the database or query it.
         DatabaseHandlerAlert db = new DatabaseHandlerAlert(this);
+        //Create spinner object to add string values to the spinner options for the Alert UI.
         Spinner spinner = findViewById(R.id.alertCategory);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.categories, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -28,19 +30,22 @@ public class Alert extends AppCompatActivity implements AdapterView.OnItemSelect
 
         // Reading all contacts
         Log.d("Reading: ", "Reading all contacts..");
+        //Query database
         List<Alerts> contacts = db.getAllAlerts();
+        //If dabase of alerts is empty, this will create default entries.
         if (contacts.isEmpty()){
             db.addAlert(new Alerts("Food","1000"));
             db.addAlert(new Alerts("Home","1000"));
             db.addAlert(new Alerts("Car","1000"));
             db.addAlert(new Alerts("Others","1000"));
         }
+        //Display the current alert limits
         contacts = db.getAllAlerts();
         TextView editText1;
         for (Alerts cn : contacts) {
             String log = "Id: " + cn.getID() + " ,Category: " +
                     cn.getCategory() + "Amount: " + cn.getAmount();
-            // Writing Contacts to log
+            // Writing Alerts to log
             if (cn.getID() == 1){
                 editText1 = (TextView) findViewById(R.id.limit0);
                 editText1.setText(cn.getAmount());
@@ -62,12 +67,16 @@ public class Alert extends AppCompatActivity implements AdapterView.OnItemSelect
     }
 
     public void setLimit(View view){
+        //Create db handler to add new entries to the database or query it.
         DatabaseHandlerAlert db = new DatabaseHandlerAlert(this);
+        //Get input values from user
         Spinner category = (Spinner) findViewById(R.id.alertCategory);
         EditText amount = (EditText) findViewById(R.id.alertAmount);
         String c = category.getSelectedItem().toString();
         String a = amount.getText().toString();
+        //Query database
         List<Alerts> contacts = db.getAllAlerts();
+        // go through all 4 categories and assign them the new amount value if there was a change.
         for (Alerts cn : contacts) {
             if (c.matches(cn.getCategory())){
                 cn.setAmount(a);
@@ -78,13 +87,15 @@ public class Alert extends AppCompatActivity implements AdapterView.OnItemSelect
     }
 
     public void refreshLimit(View view){
+        //Create db handler to add new entries to the database or query it.
         DatabaseHandlerAlert db = new DatabaseHandlerAlert(this);
+        //Go through the database entries and update the amount value on the GUI
         List<Alerts> contacts = db.getAllAlerts();
         TextView editText1;
         for (Alerts cn : contacts) {
             String log = "Id: " + cn.getID() + " ,Category: " +
                     cn.getCategory() + "Amount: " + cn.getAmount();
-            // Writing Contacts to log
+            // Writing Alerts to log
             if (cn.getID() == 1){
                 editText1 = (TextView) findViewById(R.id.limit0);
                 editText1.setText(cn.getAmount());
@@ -104,12 +115,12 @@ public class Alert extends AppCompatActivity implements AdapterView.OnItemSelect
             Log.d("Name: ", log);
         }
     }
-
+    //Method for the spinner when an item is selected.
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
     }
-
+    //Method for the spinner when an item is not selected.
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
