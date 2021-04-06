@@ -8,8 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+//Class to create a way to handle the Alerts' database.
 
 public class DatabaseHandlerAlert extends SQLiteOpenHelper {
+    //Database basic info, including the database name, version, table name, and the columns in the database
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "Alerts";
     private static final String TABLE_ALERTS = "alerts";
@@ -43,20 +45,20 @@ public class DatabaseHandlerAlert extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // code to add the new contact
+    // code to add the new alert
     void addAlert(Alerts alert) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_CATEGORY, alert.getCategory()); // Contact Category
-        values.put(KEY_AMOUNT, alert.getAmount()); // Contact Amount
+        values.put(KEY_CATEGORY, alert.getCategory()); // Alert Category
+        values.put(KEY_AMOUNT, alert.getAmount()); // Alert Amount
         // Inserting Row
         db.insert(TABLE_ALERTS, null, values);
         //2nd argument is String containing nullColumnHack
         db.close(); // Closing database connection
     }
 
-    // code to get the single contact
+    // code to get the single alert
     Alerts getAlert(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -72,7 +74,7 @@ public class DatabaseHandlerAlert extends SQLiteOpenHelper {
         return alert;
     }
 
-    // code to get all contacts in a list view
+    // code to get all alerts in a list view
     public List<Alerts> getAllAlerts() {
         List<Alerts> alertsList = new ArrayList<Alerts>();
         // Select All Query
@@ -88,16 +90,16 @@ public class DatabaseHandlerAlert extends SQLiteOpenHelper {
                 alert.setID(Integer.parseInt(cursor.getString(0)));
                 alert.setCategory(cursor.getString(1));
                 alert.setAmount(cursor.getString(2));
-                // Adding contact to list
+                // Adding alert to list
                 alertsList.add(alert);
             } while (cursor.moveToNext());
         }
 
-        // return contact list
+        // return alert list
         return alertsList;
     }
 
-    // code to update the single contact
+    // code to update the single alert
     public int updateAlert(Alerts alert) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -110,7 +112,7 @@ public class DatabaseHandlerAlert extends SQLiteOpenHelper {
                 new String[] { String.valueOf(alert.getID()) });
     }
 
-    // Deleting single contact
+    // Deleting single alert
     public void deleteAlert(Alerts alert) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_ALERTS, KEY_ID + " = ?",
@@ -118,7 +120,7 @@ public class DatabaseHandlerAlert extends SQLiteOpenHelper {
         db.close();
     }
 
-    // Getting contacts Count
+    // Getting alerts Count
     public int getAlertCount() {
         String countQuery = "SELECT  * FROM " + TABLE_ALERTS;
         SQLiteDatabase db = this.getReadableDatabase();
