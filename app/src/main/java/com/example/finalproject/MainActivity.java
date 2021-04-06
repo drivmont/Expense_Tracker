@@ -29,22 +29,21 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
-        /*
-        // remove comment to initiate registration and login activities
-        // don't forget to sign out
-
+        //Start authentication instance
         fAuth = FirebaseAuth.getInstance();
 
         if(fAuth.getCurrentUser() == null) {
             startActivity(new Intent(MainActivity.this, Login.class));
         }
-
+        //start database handler
         DatabaseHandlerExpense db = new DatabaseHandlerExpense(this);
+        //query expense database
         List<Expense> expenses = db.getAllExpenses();
         float cat1 = 0;
         float cat2 = 0;
         float cat3 = 0;
         float cat4 = 0;
+        //Go through the whole database and calculate how much have been assign for each category
         for (Expense cn : expenses) {
             if (cn.getCategory().matches("Food")){
                 cat1 += Float.parseFloat(cn.getAmount());
@@ -63,7 +62,7 @@ public class MainActivity extends AppCompatActivity  {
                 Log.d("Cat: ", "Cat 4 added");
             }
         }
-
+        //update the GUI with the categories values
         TextView editText1 = (TextView) findViewById(R.id.summaryCat1);
         TextView editText2 = (TextView) findViewById(R.id.summaryCat2);
         TextView editText3 = (TextView) findViewById(R.id.summaryCat3);
@@ -80,7 +79,7 @@ public class MainActivity extends AppCompatActivity  {
 
         SimpleDateFormat dateFormat;
         String date;
-
+        //get current date
         dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         date = dateFormat.format(new Date());
 
@@ -91,7 +90,7 @@ public class MainActivity extends AppCompatActivity  {
         Log.d("EMonth: ", m);
         Log.d("EYear: ", y);
         expenses = db.getAllExpenses();
-
+        //calculate, using each entry of the database, how many have been spent on the same day, month and year
         String ed;
         String em;
         String ey;
@@ -119,14 +118,14 @@ public class MainActivity extends AppCompatActivity  {
             }
             }
         }
-
+        //update the gui with the today, month and year expenses
         editText1 = (TextView) findViewById(R.id.todayExpenses);
         editText2 = (TextView) findViewById(R.id.monthExpenses);
         editText3 = (TextView) findViewById(R.id.yearExpenses);
         editText1.setText(Float.toString(today));
         editText2.setText(Float.toString(month));
         editText3.setText(Float.toString(year));
-
+        //query the alert database to check if any limits was exceeded by the categories expenses. If any of the categories have excedded the limit then it will turn red.
         DatabaseHandlerAlert db1 = new DatabaseHandlerAlert(this);
         List<Alerts> contacts = db1.getAllAlerts();
         for (Alerts cn : contacts) {
@@ -162,12 +161,14 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     public void addExpense(View view) {
+        //go to the expense activity
         Intent intent = new Intent(this, Expenses.class);
         Log.i("MESSAGE", "Adding Expense");
         startActivity(intent);
     }
 
     public void addAlert(View view) {
+        //go to the alert activity
         Intent intent = new Intent(this, Alert.class);
         Log.i("MESSAGE", "Adding Alert");
         startActivity(intent);
@@ -175,12 +176,14 @@ public class MainActivity extends AppCompatActivity  {
 
 
     public void signOutFireBase(View view) {
+        //go to the authentication activity
         FirebaseAuth.getInstance().signOut();
         Log.i("MESSAGE", "LOGGING OUT");
         startActivity(new Intent(MainActivity.this, Login.class));
     }
 
     public void refreshSummary(View view){
+        //refresh the expenses for each one of the categories
         DatabaseHandlerExpense db = new DatabaseHandlerExpense(this);
         List<Expense> expenses = db.getAllExpenses();
         float cat1 = 0;
@@ -261,7 +264,7 @@ public class MainActivity extends AppCompatActivity  {
                 }
             }
         }
-
+        //refresh if any of the categories expenses have been higher than the limits
         editText1 = (TextView) findViewById(R.id.todayExpenses);
         editText2 = (TextView) findViewById(R.id.monthExpenses);
         editText3 = (TextView) findViewById(R.id.yearExpenses);
