@@ -1,5 +1,5 @@
 package com.example.finalproject;
-
+//This class allows the dabase handler to create new Alerts and modify them.
 public class Alerts {
     //Define variables that every alert will have inside the database
     int _id;
