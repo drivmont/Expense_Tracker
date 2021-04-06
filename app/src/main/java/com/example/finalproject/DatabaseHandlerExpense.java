@@ -7,8 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
+//Class to create a way to handle the Expenses' database.
 
 public class DatabaseHandlerExpense extends SQLiteOpenHelper {
+    //Database basic info, including the database name, version, table name, and the columns in the database
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "Expenses";
     private static final String TABLE_EXPENSES = "expenses";
@@ -42,22 +44,22 @@ public class DatabaseHandlerExpense extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // code to add the new contact
+    // code to add the new expense
     void addExpense(Expense expense) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, expense.getName()); // Contact Name
-        values.put(KEY_CATEGORY, expense.getCategory()); // Contact Category
-        values.put(KEY_DATE, expense.getDate()); // Contact Date
-        values.put(KEY_AMOUNT, expense.getAmount()); // Contact Amount
+        values.put(KEY_NAME, expense.getName()); // Expense Name
+        values.put(KEY_CATEGORY, expense.getCategory()); // Expense Category
+        values.put(KEY_DATE, expense.getDate()); // Expense Date
+        values.put(KEY_AMOUNT, expense.getAmount()); // Expense Amount
         // Inserting Row
         db.insert(TABLE_EXPENSES, null, values);
         //2nd argument is String containing nullColumnHack
         db.close(); // Closing database connection
     }
 
-    // code to get the single contact
+    // code to get the single expense
     Expense getExpense(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -73,7 +75,7 @@ public class DatabaseHandlerExpense extends SQLiteOpenHelper {
         return expense;
     }
 
-    // code to get all contacts in a list view
+    // code to get all expenses in a list view
     public List<Expense> getAllExpenses() {
         List<Expense> expenseList = new ArrayList<Expense>();
         // Select All Query
@@ -91,16 +93,16 @@ public class DatabaseHandlerExpense extends SQLiteOpenHelper {
                 expense.setCategory(cursor.getString(2));
                 expense.setDate(cursor.getString(3));
                 expense.setAmount(cursor.getString(4));
-                // Adding contact to list
+                // Adding expense to list
                 expenseList.add(expense);
             } while (cursor.moveToNext());
         }
 
-        // return contact list
+        // return expense list
         return expenseList;
     }
 
-    // code to update the single contact
+    // code to update the single expense
     public int updateExpense(Expense expense) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -115,7 +117,7 @@ public class DatabaseHandlerExpense extends SQLiteOpenHelper {
                 new String[] { String.valueOf(expense.getID()) });
     }
 
-    // Deleting single contact
+    // Deleting single expense
     public void deleteExpense(Expense expense) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_EXPENSES, KEY_ID + " = ?",
@@ -123,7 +125,7 @@ public class DatabaseHandlerExpense extends SQLiteOpenHelper {
         db.close();
     }
 
-    // Getting contacts Count
+    // Getting expenses Count
     public int getExpenseCount() {
         String countQuery = "SELECT  * FROM " + TABLE_EXPENSES;
         SQLiteDatabase db = this.getReadableDatabase();
